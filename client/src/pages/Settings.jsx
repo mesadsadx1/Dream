@@ -1,3 +1,5 @@
+// Добавьте импорт в начало файла
+import PricingPlans from '../components/Pricing/PricingPlans';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -5,8 +7,8 @@ import {
   FiMoon, FiSun, FiSmartphone, FiMail, FiMusic, FiClock,
   FiShield, FiDownload, FiTrash2, FiVolume2, FiChevronRight, 
   FiInfo, FiHeart, FiSliders, FiCalendar, FiCheckCircle, 
-  FiUpload, FiCommand, FiZap, FiAward, FiActivity,
-  FiTrendingUp, FiPieChart, FiGitBranch, FiCoffee
+  FiUpload, FiCommand, FiZap, FiAward, FiActivity, 
+  FiTrendingUp, FiPieChart, FiGitBranch, FiCoffee, FiCreditCard
 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
@@ -712,9 +714,45 @@ const Settings = () => {
 
   const renderAccountSettings = () => (
     <div className="space-y-6">
+            {/* Управление подпиской */}
+      <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-xl p-6 border border-purple-500/30 mb-6">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+          <FiCreditCard className="mr-2" />
+          Управление подпиской
+        </h3>
+        
+        <div className="space-y-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-white">Текущий план</p>
+              <p className="text-sm text-gray-400">Активен до 31.12.2024</p>
+            </div>
+            <span className="px-3 py-1 bg-purple-600/30 text-purple-400 rounded-full">
+              Премиум
+            </span>
+          </div>
+          
+          <div className="pt-4 border-t border-purple-500/30">
+            <button
+              onClick={() => window.location.href = '/pricing'}
+              className="w-full py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+            >
+              Изменить план
+            </button>
+          </div>
+          
+          <div className="flex justify-between text-sm">
+            <button className="text-gray-400 hover:text-white">
+              История платежей
+            </button>
+            <button className="text-red-400 hover:text-red-300">
+              Отменить подписку
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="bg-gray-700/30 rounded-xl p-6">
         <h3 className="text-lg font-semibold text-white mb-4">Управление данными</h3>
-        
         <div className="space-y-4">
           <button
             onClick={() => exportData('json')}

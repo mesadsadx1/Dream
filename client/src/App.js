@@ -1,3 +1,4 @@
+import Pricing from './pages/Pricing';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -48,6 +49,7 @@ function App() {
               {/* Protected Routes */}
               <Route element={<PrivateRoute />}>
                 <Route element={<MainLayout />}>
+                  <Route path="/pricing" element={<Pricing />} />
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/interpret" element={<DreamChat />} />

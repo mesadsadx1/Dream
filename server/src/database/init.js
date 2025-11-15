@@ -17,6 +17,46 @@ const initDatabase = async () => {
 
     // Create tables
     db.serialize(() => {
+      // Добавьте эти таблицы в функцию initDatabase
+
+      // Таблица заказов
+      db.run(`
+        CREATE TABLE IF NOT EXISTS orders (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          order_id TEXT UNIQUE NOT NULL,
+          user_id INTEGER NOT NULL,
+          plan_id TEXT NOT NULL,
+          plan_name TEXT NOT NULL,
+          amount REAL NOT NULL,
+          billing_period TEXT,
+          payment_method TEXT,
+          email TEXT,
+          phone TEXT,
+          receipt_email TEXT,
+          promo_code TEXT,
+          discount INTEGER DEFAULT 0,
+          status TEXT DEFAULT 'pending',
+          paid_at DATETIME,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+      `);
+
+      // Таблица подписок
+      db.run(`
+        CREATE TABLE IF NOT EXISTS subscriptions (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          user_id INTEGER UNIQUE NOT NULL,
+          plan_id TEXT NOT NULL,
+          plan_name TEXT NOT NULL,
+          status TEXT DEFAULT 'active',
+          expires_at DATETIME,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+      `);
       // Users table с полем is_admin
       db.run(`
         CREATE TABLE IF NOT EXISTS users (
@@ -153,5 +193,6 @@ async function createAdminAccount(db, callback) {
     }
   });
 }
+
 
 module.exports = initDatabase;
