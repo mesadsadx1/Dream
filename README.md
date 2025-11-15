@@ -1,4 +1,4 @@
-# 🌙 DreamAI - AI-Powered Dream Interpreter
+# 🌙 DreamAI
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-18.2.0-blue?style=for-the-badge&logo=react" />
